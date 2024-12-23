@@ -23,8 +23,22 @@ stages:
     - script: echo Sources directory is $(Build.SourcesDirectory)
     - script: echo  docker --version |
        docker --version
+       echo "Current Directory:"
+       pwd
+       echo "Files in Directory:"
+       ls -R
 
       
+    - task: Docker@2
+      displayName: 'Build Docker Image'
+      inputs:
+        containerRegistry: 'dockerhub-connection'
+        repository: $(IMAGE_NAME)
+        command: build
+        Dockerfile: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp/Dockerfile'
+        buildContext: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp'
+        tags: |
+          $(TAG)
       
     - task: Docker@2
       displayName: Build an image
