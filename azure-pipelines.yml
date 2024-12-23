@@ -23,18 +23,6 @@ stages:
     - script: echo Sources directory is $(Build.SourcesDirectory)
 
     - task: Docker@2
-      displayName: Build an image
-    
-      inputs:
-        command: build
-        Dockerfile: 'backend_api/backend_api_csharp/Dockerfile'
-        buildContext: 'backend_api/backend_api_csharp'
-        #Dockerfile: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp/Dockerfile'
-        repository: $(IMAGE_NAME)
-        tags: |
-          $(TAG)
-
-    - task: Docker@2
       displayName: Push image to Docker Hub
       inputs:
         containerRegistry: 'dockerhub-connection'
