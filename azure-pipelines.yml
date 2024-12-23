@@ -21,7 +21,11 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - script: echo Sources directory is $(Build.SourcesDirectory)
-    
+    - script: echo  docker --version |
+       docker --version
+
+      
+      
     - task: Docker@2
       displayName: Build an image
       inputs:
