@@ -22,10 +22,7 @@ stages:
     steps:
     - script: echo Sources directory is $(Build.SourcesDirectory)
     - script: echo  docker --version |
-       docker --version
-       echo "Current Directory:"
        pwd
-       echo "Files in Directory:"
        ls -R
 
       
