@@ -1,10 +1,17 @@
 trigger:
-- main
+  branches:
+    include:
+    - main
+  paths:
+    include:
+    - azure-pipelines.yaml
+    exclude:
+    - Readme.md
 
 resources:
 - repo: self
 
-variables:  
+variables:
   IMAGE_NAME: houssemdocker/album-backend-api
   CONTAINERAPPS_APP: album-backend-api
   CONTAINERAPPS_ENVIRONMENT: aca-environment
@@ -27,8 +34,7 @@ stages:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp/Dockerfile'
         repository: $(IMAGE_NAME)
-        tags: |
-          $(TAG)
+        tags: $(TAG)
 
     - task: Docker@2
       displayName: Push image to Docker Hub
