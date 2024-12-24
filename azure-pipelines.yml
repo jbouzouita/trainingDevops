@@ -5,7 +5,7 @@ resources:
 - repo: self
 
 variables:  
-  IMAGE_NAME: jbouzouita/album-backend-api
+  IMAGE_NAME: jbouzouita/backend_api
   CONTAINERAPPS_APP: album-backend-api
   CONTAINERAPPS_ENVIRONMENT: aca-environment
   RESOURCE_GROUP: rg-containerapps-azure-pipelines
@@ -36,7 +36,7 @@ stages:
     - task: Docker@2
       displayName: Push image to Docker Hub
       inputs:
-        containerRegistry: 'dockerhub-connection1'
+        containerRegistry: 'dockerhub-connection'
         repository: $(IMAGE_NAME)
         command: 'push'
         tags: '$(TAG)'
