@@ -1,18 +1,11 @@
 trigger:
-  branches:
-    include:
-    - main
-  paths:
-    include:
-    - azure-pipelines.yaml
-    exclude:
-    - Readme.md
+- main
 
 resources:
 - repo: self
 
-variables:
-  IMAGE_NAME: houssemdocker/album-backend-api
+variables:  
+  IMAGE_NAME: jbouzouita/backend_api
   CONTAINERAPPS_APP: album-backend-api
   CONTAINERAPPS_ENVIRONMENT: aca-environment
   RESOURCE_GROUP: rg-containerapps-azure-pipelines
@@ -27,14 +20,18 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-
+    - script: |
+         echo "Listing all files in $(Build.SourcesDirectory):"
+         ls -R $(Build.SourcesDirectory)
     - task: Docker@2
       displayName: Build an image
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp/Dockerfile'
+        #Dockerfile: app/Dockerfile
         repository: $(IMAGE_NAME)
-        tags: $(TAG)
+        tags: |
+          $(TAG)
 
     - task: Docker@2
       displayName: Push image to Docker Hub
