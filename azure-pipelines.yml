@@ -25,7 +25,8 @@ stages:
       displayName: Build an image
       inputs:
         command: build
-        dockerfile: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp/Dockerfile'
+        #dockerfile: '$(Build.SourcesDirectory)/backend_api/backend_api_csharp/Dockerfile'
+        Dockerfile: app/Dockerfile
         repository: $(IMAGE_NAME)
         tags: |
           $(TAG)
